@@ -30,9 +30,48 @@ class WorkoutSchema(ma.Schema):
 workout_schema = WorkoutSchema()
 many_workout_schema = WorkoutSchema(many=True)
 
+# endpoints
+
+@app.route("/workouts/get", methods=["GET"])
+def get_workouts():
+    all_workouts = Workout.query.all()
+    result = many_workout_schema.dump(all_workouts)
+    return jsonify(result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
-app.route('movie/edit')
+@app.route('/workout/get/<id>')
+def get_one_workout(id):
+    one_workout = db.session.query(Workout).filter(Workout.id == id).firdt()
+    return jsonify(workout_schema.dump(one_workout))
+
+@app.route('/workout/edit/<id>', methods=["PUT"])
+def edit_workout(id):
+    if request.content_type != 'application/json':
+        return jsonify('Error, File needs to be JSON')
+
+        put_data = request.get_json()
+        name = put_data.get('name')
+        demo_img = put_data.get('demo_img')
+        category = put_data.get('category')
+
+        edit_workout = db.session.query(Workout).filter(Workout.id == id).first()
+        if name != None:
+            edit_workout.name = name
+        if demo_img != None:
+            edit_workout.demo_img = demo_img
+        if category != None:
+            edit_workout.category = category
+
+        db.session.commit()
+
+        return jsonify(workout_schema.dump(edit_movie))
+
+
+
+
 
 
 
