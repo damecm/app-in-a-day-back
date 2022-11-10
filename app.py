@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(baseddir, 'a
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
-class workout(db.Model): 
+class Workout(db.Model): 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String, unique=True, nullable=False)
     demo_img = db.Column(db.String, unique=True)
@@ -22,7 +22,17 @@ class workout(db.Model):
         self.demo_img = demo_img
         self.category = category
 
+class WorkoutSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'name', 'demo_img', 'category')
 
+
+workout_schema = WorkoutSchema()
+many_workout_schema = WorkoutSchema(many=True)
+
+
+
+app.route('movie/edit')
 
 
 
