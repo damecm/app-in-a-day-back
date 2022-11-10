@@ -59,6 +59,30 @@ def edit_workout(id):
 
     return jsonify(workout_schema.dump(edit_workout))
 
+@app.route('/workout/add/many', methods=['POST'])
+def add_many_workout():
+    if request.content_type != "application/json":
+        return jsonify("YUck, please Make It a JSON File")
+
+    post_data = request.get_json()
+    workouts = post_data.get("workout")
+
+    new_workouts = []
+
+    for workout in workouts:
+        name = workout.get('name')
+        demo_img = workout.get('demo_img')
+        category = workout.get('category')
+
+        existing_workout_check = db.session.query(Workout).filter(Workout.name == name).first()
+        if existing_workout_check is None:
+            new_workout = Workout(name, demo_img, category)
+            db.session.add(new_workout)
+            db.session.commit()
+            new_workouts.append(new_workout)
+
+    return jsonify(many_workout_schema.dump(new_workouts))
+
 if __name__ == '__main__':
     app.run(debug=True)
 
