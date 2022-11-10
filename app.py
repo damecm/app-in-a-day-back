@@ -32,7 +32,10 @@ many_workout_schema = WorkoutSchema(many=True)
 
 
 
-app.route('movie/edit')
+@app.route('/workout/get/<id>')
+def get_one_workout(id):
+    one_workout = db.session.query(Workout).filter(Workout.id == id).first()
+    return jsonify(workout_schema.dump(one_workout))
 
 
 
