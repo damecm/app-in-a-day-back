@@ -118,7 +118,7 @@ def add_many_workout():
         return jsonify("YUck, please Make It a JSON File")
 
     post_data = request.get_json()
-    workouts = post_data.get("workout")
+    workouts = post_data.get("workouts")
 
     new_workouts = []
 
@@ -151,37 +151,6 @@ if __name__ == '__main__':
 
 
 
-
-{
-    "name": "sit ups",
-    "category": "core",
-    "demo_img": "https://i.imgur.com/4778qbz.png"
-},
-{
-    "name": "plank",
-    "category": "core",
-    "demo_img": "https://i.imgur.com/k1bvaTr.png"
-},
-{
-    "name": "side to side",
-    "category": "core",
-    "demo_img": "https://i.imgur.com/LTO4vop.png"
-},
-{
-    "name": "flutter kicks",
-    "category": "core",
-    "demo_img": "https://i.imgur.com/DBxG2O3.png"
-},
-{
-    "name": " swimmers",
-    "category": "core",
-    "demo_img": "https://i.imgur.com/LMFTGTn.png"
-},
-{
-    "name": "bicycle kicks",
-    "category": "core",
-    "demo_img": "image.png"
-},
 
 
 
