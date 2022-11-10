@@ -39,10 +39,14 @@ def add_workout():
 
 
 
+@app.route("/workouts/get", methods=["GET"])
+def get_workouts():
+    all_workouts = Workout.query.all()
+    result = many_workout_schema.dump(all_workouts)
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True)
-
 
 
 
