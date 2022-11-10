@@ -35,18 +35,52 @@ def add_workout():
     if request.content_type != 'application/json':
         return jsonify("Error: Data must be sent as JSON")
 
+    post_data = request.get_json()
+    name = post_data.get('name')
+    demo_img = post_data.get('demo_img')
+    category = post_data.get('category')
+
+    if name == None:
+        return jsonify('Error: Name is required')
+    
+    if category == None:
+        return jsonify('Error: Category is required')
+
+    new_workout = Workout(name, demo_img, category)
+    db.session.add(new_workout)
+    db.session.commit()
+
+    return jsonify(workout_schema.dump(new_workout))
 
 
-
-
-@app.route("/workouts/get", methods=["GET"])
+@app.route("/workout/get", methods=["GET"])
 def get_workouts():
     all_workouts = Workout.query.all()
     result = many_workout_schema.dump(all_workouts)
     return jsonify(result)
 
+
+
+@app.route('/workout/delete/<id>', methods=["DELETE"])
+def delete_workout(id):
+    delete_workout = db.session.query(Workout).filter(Workout.id == id).first()
+    db.session.delete(delete_workout)
+    db.session.commit()
+
+    return jsonify('Workout Has Been Deleted')
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 
