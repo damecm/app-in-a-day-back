@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
@@ -16,6 +16,11 @@ class workout(db.Model):
     name = db.Column(db.String, unique=True, nullable=False)
     demo_img = db.Column(db.String, unique=True)
     category = db.Column(db.String, unique=True)
+
+    def __init__(self, name, demo_img, category):
+        self.name = name
+        self.demo_img = demo_img
+        self.category = category
 
 
 
