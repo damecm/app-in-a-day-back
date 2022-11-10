@@ -30,44 +30,12 @@ class WorkoutSchema(ma.Schema):
 workout_schema = WorkoutSchema()
 many_workout_schema = WorkoutSchema(many=True)
 
-@app.route('/workout/add', methods=["POST"])
-def add_workout():
-    if request.content_type != 'application/json':
-        return jsonify("Error: Data must be sent as JSON")
 
 
-
-
-
-@app.route("/workouts/get", methods=["GET"])
-def get_workouts():
-    all_workouts = Workout.query.all()
-    result = many_workout_schema.dump(all_workouts)
-    return jsonify(result)
-
-
-
-
-
-
-
-
-
-
-
-
-
-@app.route("/workouts/<id>", methods=["PUT"])
-def workout_update(id):
-    all_workouts = Workout.query.all(id)
-    name = request.json['name']
-    demo_img = request.json['demo_img']
-    category = request.json['category']
-
-
-
-
-
+@app.route('/workout/get/<id>')
+def get_one_workout(id):
+    one_workout = db.session.query(Workout).filter(Workout.id == id).first()
+    return jsonify(workout_schema.dump(one_workout))
 
 
 
