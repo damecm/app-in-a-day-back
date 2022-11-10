@@ -45,6 +45,32 @@ def get_workouts():
     result = many_workout_schema.dump(all_workouts)
     return jsonify(result)
 
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route("/workouts/<id>", methods=["PUT"])
+def workout_update(id):
+    all_workouts = Workout.query.all(id)
+    name = request.json['name']
+    demo_img = request.json['demo_img']
+    category = request.json['category']
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
