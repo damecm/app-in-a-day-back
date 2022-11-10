@@ -30,9 +30,13 @@ class WorkoutSchema(ma.Schema):
 workout_schema = WorkoutSchema()
 many_workout_schema = WorkoutSchema(many=True)
 
+@app.route('/workout/add', methods=["POST"])
+def add_workout():
+    if request.content_type != 'application/json':
+        return jsonify("Error: Data must be sent as JSON")
 
 
-app.route('movie/edit')
+
 
 
 
