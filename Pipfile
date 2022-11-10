@@ -4,12 +4,5 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
-flask-sqlalchemy = "*"
-flask-marshmallow = "*"
-marshmallow-sqlalchemy = "*"
-
-[dev-packages]
-
 [requires]
 python_version = "3.11"
