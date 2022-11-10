@@ -60,6 +60,14 @@ def get_workouts():
     return jsonify(result)
 
 
+@app.route("/workout/<id>", methods=["PUT"])
+def workout_update(id):
+    all_workouts = Workout.query.all(id)
+    name = request.json['name']
+    demo_img = request.json['demo_img']
+    category = request.json['category']
+
+
 
 @app.route('/workout/delete/<id>', methods=["DELETE"])
 def delete_workout(id):
@@ -68,11 +76,6 @@ def delete_workout(id):
     db.session.commit()
 
     return jsonify('Workout Has Been Deleted')
-
-
-
-
-
 
 
 
