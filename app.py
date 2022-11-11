@@ -15,7 +15,7 @@ class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String, unique=True, nullable=False)
     demo_img = db.Column(db.String, unique=True)
-    category = db.Column(db.String, unique=True)
+    category = db.Column(db.String)
 
     def __init__(self, name, demo_img, category):
         self.name = name
@@ -139,21 +139,3 @@ def add_many_workout():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
